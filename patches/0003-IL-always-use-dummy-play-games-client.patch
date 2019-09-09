@@ -1,0 +1,33 @@
+From 4ba27700e6f4b1878f33fd419dc33afa3c4d0675 Mon Sep 17 00:00:00 2001
+From: Hannu Hartikainen <hannu.hartikainen@gmail.com>
+Date: Sun, 8 Sep 2019 11:29:25 +0300
+Subject: [PATCH 3/8] IL: always use dummy play games client
+
+---
+ dll/Assembly-CSharp.il | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/dll/Assembly-CSharp.il b/dll/Assembly-CSharp.il
+index 0de667b..77a4685 100644
+--- a/dll/Assembly-CSharp.il
++++ b/dll/Assembly-CSharp.il
+@@ -60100,16 +60100,9 @@
+   .method assembly hidebysig static class GooglePlayGames.BasicApi.IPlayGamesClient 
+           GetPlatformPlayGamesClient() cil managed
+   {
+-    // Code size       22 (0x16)
+     .maxstack  8
+-    IL_0000:  call       bool [UnityEngine]UnityEngine.Application::get_isEditor()
+-    IL_0005:  brfalse    IL_0010
+-
+     IL_000a:  newobj     instance void GooglePlayGames.BasicApi.DummyClient::.ctor()
+     IL_000f:  ret
+-
+-    IL_0010:  newobj     instance void GooglePlayGames.Android.AndroidClient::.ctor()
+-    IL_0015:  ret
+   } // end of method PlayGamesClientFactory::GetPlatformPlayGamesClient
+ 
+ } // end of class GooglePlayGames.PlayGamesClientFactory
+-- 
+2.15.1
+

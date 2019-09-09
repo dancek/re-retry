@@ -1,0 +1,55 @@
+From 07addf2aa8d76047cc4d27d21659e5a89c81bf32 Mon Sep 17 00:00:00 2001
+From: Hannu Hartikainen <hannu.hartikainen@gmail.com>
+Date: Sun, 8 Sep 2019 14:10:31 +0300
+Subject: [PATCH 5/8] IL: always open boss levels
+
+---
+ dll/Assembly-CSharp.il | 29 +----------------------------
+ 1 file changed, 1 insertion(+), 28 deletions(-)
+
+diff --git a/dll/Assembly-CSharp.il b/dll/Assembly-CSharp.il
+index dc3988c..c0220f8 100644
+--- a/dll/Assembly-CSharp.il
++++ b/dll/Assembly-CSharp.il
+@@ -95975,37 +95975,10 @@
+     IL_0108:  stloc.s    V_5
+     IL_010a:  ldloc.s    V_5
+     IL_010c:  ldc.i4.2
+-    IL_010d:  beq        IL_0117
++    IL_010d:  beq        IL_015b
+ 
+     IL_0112:  br         IL_01a6
+ 
+-    IL_0117:  ldloc.1
+-    IL_0118:  ldfld      class StageInfo Hangar::StageInfo
+-    IL_011d:  ldfld      int32 StageInfo::BossMedalLimit
+-    IL_0122:  call       class Statistics Statistics::Instance()
+-    IL_0127:  callvirt   instance int32 Statistics::GetStarCount()
+-    IL_012c:  sub
+-    IL_012d:  stloc.3
+-    IL_012e:  ldloc.3
+-    IL_012f:  ldc.i4.0
+-    IL_0130:  ble        IL_015b
+-
+-    IL_0135:  ldc.i4.1
+-    IL_0136:  stloc.2
+-    IL_0137:  ldarg.0
+-    IL_0138:  call       instance class UIController MenuBase::get_Controller()
+-    IL_013d:  ldstr      "STR_SRC55"
+-    IL_0142:  ldc.i4.1
+-    IL_0143:  newarr     [mscorlib]System.Object
+-    IL_0148:  dup
+-    IL_0149:  ldc.i4.0
+-    IL_014a:  ldloc.3
+-    IL_014b:  box        [mscorlib]System.Int32
+-    IL_0150:  stelem.ref
+-    IL_0151:  callvirt   instance void UIController::ShowPopUp(string,
+-                                                               object[])
+-    IL_0156:  br         IL_01a1
+-
+     IL_015b:  ldstr      "HangarBoss_{0}_open"
+     IL_0160:  ldloc.1
+     IL_0161:  ldfld      class StageInfo Hangar::StageInfo
+-- 
+2.15.1
+

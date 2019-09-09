@@ -1,0 +1,56 @@
+From 22d6e968c3b8624134756d3a7c32cadf525fed3f Mon Sep 17 00:00:00 2001
+From: Hannu Hartikainen <hannu.hartikainen@gmail.com>
+Date: Sun, 8 Sep 2019 14:31:54 +0300
+Subject: [PATCH 6/8] IL: allow world unlock
+
+---
+ dll/Assembly-CSharp.il | 25 +------------------------
+ 1 file changed, 1 insertion(+), 24 deletions(-)
+
+diff --git a/dll/Assembly-CSharp.il b/dll/Assembly-CSharp.il
+index c0220f8..8e0f4af 100644
+--- a/dll/Assembly-CSharp.il
++++ b/dll/Assembly-CSharp.il
+@@ -96177,38 +96177,15 @@
+                                                                              class [UnityEngine]UnityEngine.Object)
+     IL_00f7:  brfalse    IL_0150
+ 
+-    IL_00fc:  ldloc.2
+-    IL_00fd:  callvirt   instance bool WorldChangeButton::CanBeOpened()
+-    IL_0102:  brfalse    IL_011f
+-
+     IL_0107:  ldloc.2
+     IL_0108:  ldfld      bool WorldChangeButton::locked
+-    IL_010d:  brfalse    IL_011a
++    IL_010d:  brfalse    IL_0150
+ 
+     IL_0112:  ldloc.2
+     IL_0113:  callvirt   instance void WorldChangeButton::Unlock()
+     IL_0118:  ldc.i4.0
+     IL_0119:  stloc.1
+-    IL_011a:  br         IL_0150
+ 
+-    IL_011f:  ldc.i4.0
+-    IL_0120:  stloc.1
+-    IL_0121:  ldarg.0
+-    IL_0122:  call       instance class UIController MenuBase::get_Controller()
+-    IL_0127:  ldstr      "STR_SRC67"
+-    IL_012c:  ldc.i4.1
+-    IL_012d:  newarr     [mscorlib]System.Object
+-    IL_0132:  dup
+-    IL_0133:  ldc.i4.0
+-    IL_0134:  ldloc.2
+-    IL_0135:  ldfld      int32 WorldChangeButton::StarbaCount
+-    IL_013a:  call       class Statistics Statistics::Instance()
+-    IL_013f:  callvirt   instance int32 Statistics::GetStarCount()
+-    IL_0144:  sub
+-    IL_0145:  box        [mscorlib]System.Int32
+-    IL_014a:  stelem.ref
+-    IL_014b:  callvirt   instance void UIController::ShowPopUp(string,
+-                                                               object[])
+     IL_0150:  ldloc.1
+     IL_0151:  brfalse    IL_0199
+ 
+-- 
+2.15.1
+

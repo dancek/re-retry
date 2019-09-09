@@ -1,0 +1,107 @@
+From 71406db7f11384800be9cb08db9a5ff91b449e39 Mon Sep 17 00:00:00 2001
+From: Hannu Hartikainen <hannu.hartikainen@gmail.com>
+Date: Mon, 9 Sep 2019 22:01:36 +0300
+Subject: [PATCH 8/8] IL: don't use up coins
+
+---
+ dll/Assembly-CSharp.il | 84 ++------------------------------------------------
+ 1 file changed, 2 insertions(+), 82 deletions(-)
+
+diff --git a/dll/Assembly-CSharp.il b/dll/Assembly-CSharp.il
+index 3a184e1..1a8574e 100644
+--- a/dll/Assembly-CSharp.il
++++ b/dll/Assembly-CSharp.il
+@@ -87980,88 +87980,8 @@
+           CoinsUsed([opt] int32 'value') cil managed
+   {
+     .param [1] = int32(0x00000001)
+-    // Code size       187 (0xbb)
+-    .maxstack  21
+-    .locals init (class [mscorlib]System.Collections.Generic.Dictionary`2<string,string> V_0)
+-    IL_0000:  ldarg.0
+-    IL_0001:  ldfld      int32 PlayerData::m_coinCount
+-    IL_0006:  ldarg.1
+-    IL_0007:  blt        IL_0040
+-
+-    IL_000c:  ldarg.0
+-    IL_000d:  dup
+-    IL_000e:  ldfld      int32 PlayerData::m_coinCount
+-    IL_0013:  ldarg.1
+-    IL_0014:  sub
+-    IL_0015:  stfld      int32 PlayerData::m_coinCount
+-    IL_001a:  ldarg.0
+-    IL_001b:  ldfld      class CoinsUI PlayerData::m_coinsUI
+-    IL_0020:  ldnull
+-    IL_0021:  call       bool [UnityEngine]UnityEngine.Object::op_Inequality(class [UnityEngine]UnityEngine.Object,
+-                                                                             class [UnityEngine]UnityEngine.Object)
+-    IL_0026:  brfalse    IL_003b
+-
+-    IL_002b:  ldarg.0
+-    IL_002c:  ldfld      class CoinsUI PlayerData::m_coinsUI
+-    IL_0031:  ldc.i4.1
+-    IL_0032:  ldc.i4.2
+-    IL_0033:  ldc.i4.m1
+-    IL_0034:  ldarg.1
+-    IL_0035:  mul
+-    IL_0036:  callvirt   instance void CoinsUI::ShowCoins(bool,
+-                                                          valuetype CoinsUI/CoinsState,
+-                                                          int32)
+-    IL_003b:  br         IL_00ba
+-
+-    IL_0040:  ldc.i4.5
+-    IL_0041:  newarr     [mscorlib]System.String
+-    IL_0046:  dup
+-    IL_0047:  ldc.i4.0
+-    IL_0048:  ldstr      "Using coins but balance is not enough! ("
+-    IL_004d:  stelem.ref
+-    IL_004e:  dup
+-    IL_004f:  ldc.i4.1
+-    IL_0050:  ldarg.0
+-    IL_0051:  ldflda     int32 PlayerData::m_coinCount
+-    IL_0056:  call       instance string [mscorlib]System.Int32::ToString()
+-    IL_005b:  stelem.ref
+-    IL_005c:  dup
+-    IL_005d:  ldc.i4.2
+-    IL_005e:  ldstr      " < "
+-    IL_0063:  stelem.ref
+-    IL_0064:  dup
+-    IL_0065:  ldc.i4.3
+-    IL_0066:  ldarga.s   'value'
+-    IL_0068:  call       instance string [mscorlib]System.Int32::ToString()
+-    IL_006d:  stelem.ref
+-    IL_006e:  dup
+-    IL_006f:  ldc.i4.4
+-    IL_0070:  ldstr      ")"
+-    IL_0075:  stelem.ref
+-    IL_0076:  call       string [mscorlib]System.String::Concat(string[])
+-    IL_007b:  call       void [UnityEngine]UnityEngine.Debug::LogError(object)
+-    IL_0080:  ldstr      "InvalidPurchaseMade"
+-    IL_0085:  newobj     instance void class [mscorlib]System.Collections.Generic.Dictionary`2<string,string>::.ctor()
+-    IL_008a:  stloc.0
+-    IL_008b:  ldloc.0
+-    IL_008c:  ldstr      "coinCount"
+-    IL_0091:  ldarg.0
+-    IL_0092:  ldflda     int32 PlayerData::m_coinCount
+-    IL_0097:  call       instance string [mscorlib]System.Int32::ToString()
+-    IL_009c:  callvirt   instance void class [mscorlib]System.Collections.Generic.Dictionary`2<string,string>::Add(!0,
+-                                                                                                                   !1)
+-    IL_00a1:  ldloc.0
+-    IL_00a2:  ldstr      "value"
+-    IL_00a7:  ldarga.s   'value'
+-    IL_00a9:  call       instance string [mscorlib]System.Int32::ToString()
+-    IL_00ae:  callvirt   instance void class [mscorlib]System.Collections.Generic.Dictionary`2<string,string>::Add(!0,
+-                                                                                                                   !1)
+-    IL_00b3:  ldloc.0
+-    IL_00b4:  ldc.i4.0
+-    IL_00b5:  call       void ['Assembly-CSharp-firstpass']FlurryBinding::logEventWithParameters(string,
+-                                                                                                 class [mscorlib]System.Collections.Generic.Dictionary`2<string,string>,
+-                                                                                                 bool)
+-    IL_00ba:  ret
++    .maxstack 8
++    ret
+   } // end of method PlayerData::CoinsUsed
+ 
+   .method private hidebysig instance void 
+-- 
+2.15.1
+

@@ -1,0 +1,25 @@
+From 0a6695dc282932e8c3e46fb8714403c039edbb79 Mon Sep 17 00:00:00 2001
+From: Hannu Hartikainen <hannu.hartikainen@gmail.com>
+Date: Wed, 4 Sep 2019 11:52:56 +0300
+Subject: [PATCH 2/8] debuggable=true
+
+---
+ apk.out/AndroidManifest.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/apk.out/AndroidManifest.xml b/apk.out/AndroidManifest.xml
+index 26e6850..4d07bf6 100644
+--- a/apk.out/AndroidManifest.xml
++++ b/apk.out/AndroidManifest.xml
+@@ -7,7 +7,7 @@
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+     <uses-permission android:name="com.android.vending.BILLING"/>
+     <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true"/>
+-    <application android:debuggable="false" android:icon="@drawable/app_icon" android:label="@string/app_name">
++    <application android:debuggable="true" android:icon="@drawable/app_icon" android:label="@string/app_name">
+         <activity android:label="@string/app_name" android:name="com.rovio.skynest.SkynestUnityActivity"/>
+         <meta-data android:name="com.rovio.skynest.ActivitySharingProxy" android:value="UnityPlayerActivityProxy"/>
+         <activity android:configChanges="fontScale|keyboard|keyboardHidden|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.unity3d.player.UnityPlayerActivity" android:screenOrientation="sensorLandscape"/>
+-- 
+2.15.1
+

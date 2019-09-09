@@ -1,9 +1,10 @@
 all: dist/signed.apk
 
-.PHONY: all clean install unpack
+.PHONY: all clean install patch
 
 APK_DIR=apk.out/
 MAIN_DLL=${APK_DIR}assets/bin/Data/Managed/Assembly-CSharp.dll
+MAIN_IL=dll/Assembly-CSharp.il
 
 ${APK_DIR}: original.apk
 	sha256sum -c CHECKSUMS.sha256
@@ -15,7 +16,7 @@ install: dist/signed.apk
 	adb install $<
 
 clean:
-	rm -rf dist/ dll/ ${APK_DIR}
+	rm -rf dist/ dll/ ${APK_DIR} .patched/
 
 dist/base.apk: ${APK_DIR} ${MAIN_DLL}
 	mkdir -p dist/
@@ -33,8 +34,17 @@ debug-key.pk8:
 	openssl pkcs8 -topk8 -outform DER -in debug-key.pem -inform PEM -out debug-key.pk8 -nocrypt
 	rm debug-key.pem
 
-dll/main.il: dll/original/Assembly-CSharp.dll
+${MAIN_IL}: dll/original/Assembly-CSharp.dll
 	ildasm -out=$@ $<
 
-${MAIN_DLL}: dll/main.il
-	ilasm -dll -output=$@ $<
+patches:= $(sort $(wildcard patches/*.patch))
+patch_runs:= $(patsubst patches/%.patch, .patched/%, ${patches})
+
+.patched/%: patches/%.patch
+	mkdir -p .patched/
+	patch -p1 < $<
+	touch $@
+
+${MAIN_DLL}: ${MAIN_IL} ${patch_runs}
+	ilasm -dll -quiet -output=$@ $<
+

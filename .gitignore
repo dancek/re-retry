@@ -1,6 +1,7 @@
 apk.out/
 dist/
 dll/
+.patched/
 
 original.apk
 
