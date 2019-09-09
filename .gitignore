@@ -1,0 +1,8 @@
+apk.out/
+dist/
+dll/
+
+original.apk
+
+debug-cert.pem
+debug-key.pk8
